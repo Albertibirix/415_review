@@ -4,10 +4,15 @@
 #include <cstdio>
 #include <conio.h>
 
-using namespace std;
-
 #include "SharedMemory.h"
 
+using namespace std;
+
+SharedMemory::SharedMemory()
+{
+
+  
+}
 
 SharedMemory::SharedMemory(char *Name, char Size, int q, int N)
 {
