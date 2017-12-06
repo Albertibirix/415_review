@@ -8,6 +8,7 @@ private:
 	int N;
 
 public:
+	SharedMemory();
 	SharedMemory(char *Name, char Size, int q, int N);
 	~SharedMemory();
 	void write_data(double A[], char str[]);
