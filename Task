@@ -1,0 +1,28 @@
+MECH 415  Final Exam Review
+
+Question #1
+
+a) Develop a class called SharedMemory that manages a Windows shared memory block.  The class allows N programs running on the same computer to access a common memory block.  Each program will have one instance of the object.  SharedMemory has the following private member variables:
+
+Name – a string variable that holds the name of the shared memory block
+Size – the size in bytes of the shared memory block
+P – a character pointer to the shared memory block
+q – an integer indicating the number of the program using a given instance of the object.
+Note: each program will have a unique identifying number q which can range from 1 to N.
+N – an integer indicating the total number of programs accessing the shared memory block.
+
+The class also has the following public member functions (print out “error” and return if there’s an error):
+
+b) A constructor with the arguments Name, Size, q, and N.  The constructor will appropriately initialize all member variables with each byte of memory equal to 0 (the number not the character).
+
+One of the main problems with shared memory occurs when one program reads it when the memory is not completely up to date (i.e. the programs are out of sync).  For example, a state vector is read from memory by one program, but half of the vector is from time t-dt and the other half is from time t.  
+
+One approach to avoid this problem is to use a token passing (i.e. “talking stick”) algorithm.  An integer number (token) is kept in the shared memory indicating which program q currently has access (both reading and writing) to the shared memory.  No program other than q=token can access the memory.  After program q is done using the memory the token number is increased by one thereby passing the token to the next program.  After the token number reaches N it starts at one again.
+
+c) Develop a function called write_data(double A[], char str[]) that writes an array A of 100 doubles and a string str to the shared memory block.  An integer representing the token number is located at the beginning of the memory block followed by A and then str.  The function should check the token number and wait (using the Sleep function) until its turn.  Then write the data and assign the token number to the next program.
+
+d)  Develop a function called read_data(double A[], char str[]) that is completely analogous to the write_data function.
+
+e) Illustrate the SharedMemory class for the case of N=2 and test it on your computer in order to verify your programming.  Note that this entails compiling and running two exe files / programs with each program using a SharedMemory object.  Program 1 can set/write the double elements to some value (eg time from the highresolutiontime function) and program 2 can read the double elements and print them out to the screen.  This is analogous to the shared memory example (the A/B programs) discussed in our lectures.
+ 
+
